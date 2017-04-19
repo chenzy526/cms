@@ -1,0 +1,14 @@
+<div id="video" style="position:relative;z-index: 100;width:100%;height:100%;float: left;"><div id="a1"></div></div>
+<script type="text/javascript" src="{JS_PATH}pxgrids/ckplayer/ckplayer.js" charset="utf-8"></script>
+<script type="text/javascript">
+	var flashvars={
+		{php preg_match_all("/<a href='(.*)'(.*)<\/a>/iUs",$video[0],$r);}
+		f:'{$r[1][0]}',
+		c:0,
+		i:'{$thumb}',//初始图片地址
+		b:1
+		};
+	var params={bgcolor:'#FFF',allowFullScreen:true,allowScriptAccess:'always',wmode:'transparent'};
+	CKobject.embedSWF('{JS_PATH}pxgrids/ckplayer/ckplayer.swf','a1','ckplayer_a1','100%','100%',flashvars,params);
+  </script>
+

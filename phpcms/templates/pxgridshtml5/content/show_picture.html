@@ -1,0 +1,23 @@
+{template "content","header"}
+<div id="mid_caption"><!-- start mid_caption -->
+  <div class="pages">
+      <!-- Page Title -->
+      <div id="page-title"> 
+        {pc:get sql="SELECT `catid`,`catname` FROM `phpcms_category` WHERE catid = $catid" return="data"}
+        {loop $data $r}
+        <h2>{$r[catname]}</h2>
+        {/loop}
+        {/pc}
+      <div class="clear"></div>
+      <div id="bolded-line"></div>
+      </div>
+      <!-- Page Title / End -->
+    <div class="clear"></div>
+  </div>
+</div><!-- END mid_caption -->
+<div id="content_wrapper"><!-- start content_wrapper-->
+  <div id="content_fullwidth"><!-- start content_fullwidth-->
+  <div class="showimg"><img src="{$thumb}">{$content}</div></div>
+  <!-- END content_fullwidth-->
+</div><!-- END content_wrapper-->
+{template "content","footer"}

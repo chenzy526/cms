@@ -1,0 +1,140 @@
+{template "content","header"}
+<div id="mid_caption"><!-- start mid_caption -->
+  <div class="pages">
+      <!-- Page Title -->
+      <div id="page-title"> 
+        {pc:get sql="SELECT `catid`,`catname` FROM `phpcms_category` WHERE catid = $catid" return="data"}
+        {loop $data $r}
+        <h2>{$r[catname]}</h2>
+        {/loop}
+        {/pc}
+      <div class="clear"></div>
+      <div id="bolded-line"></div>
+      </div>
+      <!-- Page Title / End -->
+    <div class="clear"></div>
+  </div>
+</div><!-- END mid_caption -->
+<div id="content_wrapper"><!-- start content_wrapper-->
+<div class="content" class="left">
+      <table width="100%" cellpadding="0" cellspacing="1" class="down_info">
+        <div class="dftitle">
+        <!-- Baidu Button BEGIN -->
+        <div class="dfshare">
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+        <a class="bds_tsina"></a>
+        <a class="bds_douban"></a>
+        <a class="bds_mail"></a>
+        <a class="bds_print"></a>
+        <span class="bds_more"></span>
+        </div>
+        <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=19324" ></script>
+        <script type="text/javascript" id="bdshell_js"></script>
+        <script type="text/javascript">
+        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+        </script></div>
+        <!-- Baidu Button END -->
+        <h2 class="dotted_line">{$title}</h2></div>
+        <tbody><tr>
+          <th width="15%" align="left">授权形式：</th>
+          <td>{$copytype}</td>
+          <td width="350" rowspan="7" align="center" valign="middle">{if $thumb}<a href="{$thumb}" target="_blank"><img class="downimg" src="{$thumb}" width="320" height="220" /></a>{/if}</td>
+        </tr>
+        <tr>
+          <th width="15%" align="left">更新时间：</th>
+          <td>{$updatetime}</td>
+        </tr>
+        <tr>
+          <th width="15%" align="left">软件语言：</th>
+          <td>{$language}</td>
+        </tr>
+        <tr>
+          <th width="15%" align="left">软件平台：</th>
+          <td>{$systems}</td>
+        </tr>
+        <tr>
+          <th width="15%" align="left">软件类别：</th>
+          <td> {$classtype}</td>
+        </tr>
+        <tr>
+          <th width="15%" align="left">文件大小：</th>
+          <td> {$filesize}</td>
+        </tr>
+        <tr>
+          <th width="15%" align="left">评论等级：</th>
+          <td class="c_orange"> {$stars}</td>
+        </tr>
+<tr>
+          <th width="15%" align="left">浏览次数：</th>
+          <td colspan="2"><span id="hits"></span>（今日：<span id="todaydowns"></span>，本周：<span id="weekdowns"></span>，本月：<span id="monthdowns"></span>）</td>
+        </tr>
+      </tbody></table>
+      <h4><strong>软件简介</strong></h4>
+      <div class="poline"></div>
+      <div id="postcon"><p>{$content}</p></div>
+<script>
+(function(){
+  var o = document.getElementById("postcon");
+  var s = o.innerHTML;
+  var p = document.createElement("span");
+  var n = document.createElement("a");
+  p.innerHTML = s.substring(0,150);
+  n.innerHTML = s.length > 150 ? "显示全部" : "";
+  n.href = "###";
+  n.id = "folding";
+  n.onclick = function(){
+    if (n.innerHTML == "显示全部"){
+      n.innerHTML = "隐藏部分";
+      p.innerHTML = s;
+    }else{
+      n.innerHTML = "显示全部";
+      p.innerHTML = s.substring(0,150);
+    }
+  }
+  o.innerHTML = "";
+  o.appendChild(p);
+  o.appendChild(n);
+})();
+</script>
+  <h4><strong>下载文件</strong></h4>
+  <div class="poline"></div>
+  <div class="downfile">
+        {loop $downfile $r}
+            <li><h3 class="button white">{$r}</h3></li>
+        {/loop}
+        {loop $downfiles $r}
+            <li><h3 class="button white">{$r}</h3></li>
+        {/loop}			
+  </div>
+  </div>
+  <div id="sidebar-right">
+	<div class="right-sidebar-block">
+	<h3 class="dotted_line">下载排行榜</h3>
+	<div class="navigation">
+    {php $num=0;}
+    {pc:content action="hits" catid="$catid" num="10" order="views DESC" cache="3600"}
+    <ul>
+    {loop $data $v}
+    {php $num++;}
+    <li><em>{$num}</em> <a href="{$v[url]}" target="_blank">{str_cut($v['title'],48)}</a></li>
+    {/loop}
+    </ul>
+    {/pc}
+    </div>
+	</div>
+    <div class="right-sidebar-block">
+	<h3 class="dotted_line">相关下载</h3>
+	<div class="navigation">
+    {pc:content action="relation" relation="$relation" catid="$catid" num="5" keywords="$rs[keywords]"}
+    {loop $data $r}
+    <li><a href="{$r[url]}" target="_blank">{str_cut($r['title'],48)}</a></li>
+    {/loop}
+    {/pc}
+    </div>
+	</div>
+</div>
+</div>
+</div>
+<div class="bk10"></div>
+<script language="JavaScript" src="{APP_PATH}api.php?op=count&id={$id}&modelid={$modelid}"></script>
+{template "content","footer"}

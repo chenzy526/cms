@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+<title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+<meta name="keywords" content="{$SEO['keyword']}">
+<meta name="description" content="{$SEO['description']}">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="renderer" content="webkit">
+<meta name="author" content="Pixel grid studio">
+<link rel="icon" type="image/ico" href="/favicon.ico">
+<!--STYLESHEETS-->
+<link href="{CSS_PATH}pxgrids/blue.css" rel="stylesheet" type="text/css">
+<link href="{CSS_PATH}pxgrids/flexslider/flexslider.css" rel="stylesheet" media="screen">
+<link href="{CSS_PATH}pxgrids/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css">
+<!--JAVASCRIPTS-->
+<script type="text/javascript" src="{JS_PATH}pxgrids/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="{JS_PATH}pxgrids/jquery.flexslider-min.js"></script>
+<!--[if IE 6]>
+  <script src="{JS_PATH}pxgrids/killie6.js"></script>
+<![endif]-->
+</head>
+<body>
+<!--start header-wrapper-->
+<div id="header-wrapper">
+    <!--start header-->
+    <div id="header">
+      <div class="logoheader"><a href="{siteurl($siteid)}" id="logo"></a></div>
+          <!--导航开始-->
+          <div id="navigation">
+          <ul id="nav" class="dropmenu">
+          {pc:content action="category" catid="0" num="6" siteid="$siteid" order="listorder ASC"}
+          <li {if !$catid} class="current-menu-item"{/if}><a href="{siteurl($siteid)}">
+              <!-- <span>首&nbsp;&nbsp;&nbsp;&nbsp;页</span> -->
+              <span><?php echo L('home_page')?></span>
+          </a>
+          </li>
+          {loop $data $r}
+          <li {if is_parents($r[catid],$catid,$CATEGORYS)&&$r[type]!=2} class="current-menu-item"{/if}>
+          <!-- <a href="{$r[url]}">{$r[catname]}{if $r[catid]!=$CATEGORYS[$r[catid]][arrchildid]}<span class="menuPlus">+</span>{/if}</a> -->
+          <a href="{$r[url]}"><?php echo L($r['catname'])?>{if $r[catid]!=$CATEGORYS[$r[catid]][arrchildid]}<span class="menuPlus">+</span>{/if}</a>
+          <!--二级下拉菜单-->
+          {php $nowcatid=$r[catid];}
+          {pc:content action="category" catid="$nowcatid" siteid="$siteid" order="listorder ASC" return="data1"}
+            {if count($data1)>0}
+              <ul class="sub-menu">
+              {loop $data1 $v}
+              <li><a href="{$v[url]}">{$v[catname]}{if $v[catid]!=$CATEGORYS[$v[catid]][arrchildid]}<span class="menuArrow">+</span>{/if}</a>
+              	<!--三级下拉菜单-->
+                {php $nowcatid=$v[catid];}
+          		{pc:content action="category" catid="$nowcatid" siteid="$siteid" order="listorder ASC" return="data2"}
+            	{if count($data2)>0}
+              	<ul class="sub-menu">
+             	{loop $data2 $s}
+              	<li><a href="{$s[url]}">{$s[catname]}</a>{if $s[catid]!=$CATEGORYS[$s[catid]][arrchildid]}<span class="menuArrow">+</span>{/if}</li>
+              	{/loop}     
+              	</ul>
+            	{/if}
+          		{/pc}
+              	<!--三级下拉菜单 END-->
+              </li> 
+              {/loop}     
+              </ul>
+            {/if}
+          {/pc}
+		  <!--二级下拉菜单END-->
+          </li>
+          {/loop}
+          {/pc}
+          {php echo runhook('glogal_menu')}
+          {if $top_parentid}
+          {/if}
+          </ul>
+          </div>
+          <!--导航结束-->
+      </div>
+    <!--[END] header-->
+</div>
+<!--[END] header-wrapper-->

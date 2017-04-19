@@ -1,0 +1,70 @@
+{template "content","header"}
+<script type="text/javascript" src="{JS_PATH}pxgrids/cloud-zoom.1.0.2.min.js"></script>
+<!-- start mid_caption -->
+<div id="mid_caption">
+<div class="pages">
+<!-- Page Title -->
+<div id="page-title"> 
+  {pc:get sql="SELECT `catid`,`catname` FROM `phpcms_category` WHERE catid = $catid" return="data"}
+  {loop $data $r}
+  <h2>{$r[catname]}</h2>
+  {/loop}
+  {/pc}
+<div class="clear"></div>
+<div id="bolded-line"></div>
+</div>
+<!-- Page Title / End -->
+<div class="clear"></div>
+</div>
+</div>
+<!-- END mid_caption -->
+<!-- start content_wrapper-->
+<div id="content_wrapper">
+<!-- start sidebar-left -->
+<div id="sidebar-left">
+<div class="left-sidebar-block">	
+<h3 class="dotted_line">栏目导航</h3>	
+<div class="tout news_categories">
+<ul>
+{php $j=1;} 
+{php $now_catid = $CATEGORYS[$catid][parentid] == 0 ? $catid : $CATEGORYS[$catid][parentid];}
+{loop subcat($now_catid) $v} 
+{php if($v['type']!=0) continue;} 
+<li{if $catid==$v[catid]} class="prselected"{/if}><a href="{$v[url]}"><span>{$v[catname]}</span><span class="symbol">></span></a></li>
+{/loop}
+</ul>
+</div>
+</div>
+<div class="sweibo"><iframe width="230" height="85" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=230&height=85&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=3774309970&verifier=5dd3f091&colors=d6f3f7,f8f8f8,666666,0082cb,ecfbfd&dpc=1"></iframe></div>
+</div>
+<!-- END sidebar-left -->
+<!-- start content -->
+<div class="content" id="prowidth">
+<div class="contents">
+<!--zoom-section start-->
+<div class="zoom-section">    	  
+<div class="zoom-small-image">
+<a href='{$thumb}' class = 'cloud-zoom' id='zoom1' rel="adjustX:10, adjustY:-4"><img src="{thumb($thumb, 360, 250)}" alt="{$title}" /></a></div>
+<div class="content-info">
+<ul>
+<li id="contitle"><h1>{$title}</h1></li>
+<li>{$description}</li>
+<li class="qqonline"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2303416339&amp;site=qq&amp;menu=yes" class="button white">在线咨询</a> <a href="{$buyurl}" class="button redbtn" target="_blank">马上购买</a></li>
+</ul>
+</div>
+</div>
+<!--zoom-section end-->
+<div class="breadcrumbs">
+<ul>
+<li><span>产品介绍：</span></li>
+</ul>
+</div>
+<div class="clear"></div>
+<div class="dotted_line"></div>
+<div class="content-pro">{$content}</div>
+
+</div></div>
+<!-- END content -->
+</div>
+<!-- END content_wrapper-->
+{template "content","footer"}

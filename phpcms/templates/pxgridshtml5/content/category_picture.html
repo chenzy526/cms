@@ -1,0 +1,76 @@
+{template "content","header"}
+<link href="{CSS_PATH}pxgrids/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="{JS_PATH}pxgrids/jquery.fancybox-1.3.4.pack.js"></script>
+<script type="text/javascript" src="{JS_PATH}pxgrids/portfolio.js"></script>
+<script type='text/javascript' src='{JS_PATH}pxgrids/custom-libraries.js?ver=1.0'></script>
+<div id="mid_caption"><!-- start mid_caption -->
+  <div class="pages">
+      <!-- Page Title -->
+      <div id="page-title"> 
+        {pc:get sql="SELECT `catid`,`catname` FROM `phpcms_category` WHERE catid = $catid" return="data"}
+        {loop $data $r}
+        <h2>{$r[catname]}</h2>
+        {/loop}
+        {/pc}
+      <div class="clear"></div>
+      <div id="bolded-line"></div>
+      </div>
+      <!-- Page Title / End -->
+    <div class="clear"></div>
+  </div>
+</div><!-- END mid_caption -->
+<div id="content_wrapper"><!-- start content_wrapper-->
+  <div id="content_fullwidth"><!-- start content_fullwidth-->
+    <div id="main_column_fullwidth"><!-- start main_column_fullwidth-->			
+    <div class="clear"></div>
+    <!-- start breadcrumbs -->
+    <div class="breadcrumbs none">
+    <ul>
+        <li><span>图 片 频 道 栏 目</span></li>
+        <li><div class="description">
+        <div id="portfolio-filter">
+          <ul>
+          <li><a href="#all">全部</a></li>
+          {php $j=1;} 
+          {php $now_catid = $CATEGORYS[$catid][parentid] == 0 ? $catid : $CATEGORYS[$catid][parentid];}
+          {loop subcat($now_catid) $v} 
+          {php if($v['type']!=0) continue;} 
+          <li><a {if $catid==$v[catid]} class="current"{/if} href="#{$v[catdir]}">{$v[catname]}</a></li>
+          {/loop}
+          </ul><!--END ul-->
+        </div><!--END ul gallery-filter-->
+        </div></li>
+    </ul>
+    </div>
+    <!-- [END] breadcrumbs -->
+    <div class="clear"></div>
+    <div id="line"></div>
+    <!-- BEGIN: portfolio filter -->
+      <div id="portfolio"> <!--start portfolio -->
+        <div class="clear"></div>
+            <!-- BEGIN: Portfolio -->
+            {pc:content  action="lists" catid="$catid" order="id DESC" num="32" page="$page" thumb="1"}
+              <div id="portfolio_box"><!--start portfolio_box-->
+              {loop $data $r}
+              {if $n%2==1}
+              <ul id="pxgridsimglist">
+              {/if}
+              <li class="{$CATEGORYS[$r[catid]][catdir]}" style="display: list-item;">
+              <div class="image">
+              <a href="{$r[thumb]}" class="iframe" data-id="fancybox-portfolio"><img src="{thumb($r[thumb],220,140)}" alt="#" style="opacity: 1;"></a>
+              </div>
+              <div class="project_info">
+              <h2><a href="{$r['url']}">{$r[title]}</a></h2>
+              <h3></h3>
+              </div>
+              </li>
+              {if $n%2==0} </ul>{/if}
+              {/loop}
+			      {/pc}
+      		  </div><!--END portfolio_box-->
+        <div id="clear"></div>
+      </div><!--END portfolio -->
+    </div><!-- END main_column_fullwidth-->	
+  </div><!-- END content_fullwidth-->
+</div><!-- END content_wrapper-->
+{template "content","footer"}

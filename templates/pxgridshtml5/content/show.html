@@ -1,0 +1,74 @@
+{template "content","header"}
+<!-- start mid_caption -->
+<div id="mid_caption">
+<div class="pages">
+<!-- Page Title -->
+<div id="page-title"> 
+  {pc:get sql="SELECT `catid`,`catname` FROM `phpcms_category` WHERE catid = $catid" return="data"}
+  {loop $data $r}
+  <h2>{$r[catname]}</h2>
+  {/loop}
+  {/pc}
+<div class="clear"></div>
+<div id="bolded-line"></div>
+</div>
+<!-- Page Title / End -->
+<div class="clear"></div>
+</div>
+</div>
+<!-- END mid_caption -->
+<!-- start content -->
+<!-- start content_wrapper-->
+<div id="content_wrapper">
+<!-- start sidebar-left -->
+<div id="sidebar-left">
+<div class="left-sidebar-block">	
+<h3 class="dotted_line">栏目导航</h3>	
+<div class="tout news_categories">
+<ul>
+{php $j=1;} 
+{php $now_catid = $CATEGORYS[$catid][parentid] == 0 ? $catid : $CATEGORYS[$catid][parentid];}
+{loop subcat($now_catid) $v} 
+{php if($v['type']!=0) continue;} 
+<li{if $catid==$v[catid]} class="prselected"{/if}><a href="{$v[url]}"><span>{$v[catname]}</span><span class="symbol">></span></a></li>
+{/loop}
+</ul>
+</div>
+</div>
+<div class="sweibo"><iframe width="230" height="85" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=230&height=85&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=3774309970&verifier=5dd3f091&colors=d6f3f7,f8f8f8,666666,0082cb,ecfbfd&dpc=1"></iframe></div>
+</div>
+<!-- END sidebar-left -->
+<!-- start content -->
+<div class="content" id="prowidth">
+<div id="main_column_left">
+<!-- start post -->
+<div class="post">
+<h2 class="post_title">{$title}</h2>
+<div class="poline"></div>
+<div class="postcon"><p>{$content}</p></div>
+<br>
+</div>
+<!-- end post -->
+</div>
+<div id="pages" class="text-c">{$pages}</div>
+<div class="clear"></div>
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+<a class="bds_tsina"></a>
+<a class="bds_douban"></a>
+<a class="bds_mail"></a>
+<a class="bds_print"></a>
+<span class="bds_more"></span>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=19324" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+<div class="clear"></div>
+</div>
+<!-- END content -->
+</div>
+<!-- END content_wrapper-->
+{template "content","footer"}

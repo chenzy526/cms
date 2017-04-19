@@ -1,0 +1,48 @@
+{template "content","header"}
+<!--start mid_caption-->
+<div id="mid_caption">
+<div class="pages">
+<!--Page Title-->
+<div id="page-title"> 
+  {pc:get sql="SELECT `catid`,`catname` FROM `phpcms_category` WHERE catid = $catid" return="data"}
+  {loop $data $r}
+  <h2>{$r[catname]}</h2>
+  {/loop}
+  {/pc}
+<div class="clear"></div>
+<div id="bolded-line"></div>
+</div>
+<!--Page Title / End-->
+<div class="clear"></div>
+</div>
+</div>
+<!--END mid_caption-->
+<div id="content_wrapper">
+<!-- start content -->
+<div id="content">
+<div id="main_column_left">
+<!-- start post -->
+{pc:content  action="lists" catid="$catid" order="id DESC" page="$page" num="6"}
+{loop $data $r}
+<div class="post" style="margin-top: 28px;">
+<h2 class="post_title"><a href="{$r['url']}" title="{$r[title]}">{$r[title]}</a></h2>
+<div class="byline">{date('Y-m-d',$r[inputtime])} | {$CATEGORYS[$r[catid]][catname]}</div>
+<p>{str_cut($r['description'],200)}</p>
+<br>
+<a href="{$r['url']}" class="button white">查看更多</a>						
+</div>
+<div class="poline"></div>
+{/loop}
+{/pc}
+<!-- end post -->
+</div>
+<div class="clear"></div>
+<!-- Pagination -->
+<div class="pagination"><ul>{$custom_pages}</ul></div>
+<!-- End Pagination -->
+<div class="clear"></div>
+</div>
+<!-- END content -->
+</div>
+<!-- END content_wrapper-->
+{template 'content', 'footer'}

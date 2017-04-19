@@ -1,0 +1,73 @@
+{template "content","header"}
+<!-- start mid_caption -->
+<div id="mid_caption">
+<div class="pages">
+<!-- Page Title -->
+<div id="page-title"> 
+  {pc:get sql="SELECT `catid`,`catname` FROM `phpcms_category` WHERE catid = $catid" return="data"}
+  {loop $data $r}
+  <h2>{$r[catname]}</h2>
+  {/loop}
+  {/pc}
+<div class="clear"></div>
+<div id="bolded-line"></div>
+</div>
+<!-- Page Title / End -->
+<div class="clear"></div>
+</div>
+</div>
+<!-- END mid_caption -->
+<!-- start content -->
+<!-- start content_wrapper-->
+<div id="content_wrapper">
+<!-- start sidebar-left -->
+<div id="sidebar-left">
+<div class="left-sidebar-block">	
+<h3 class="dotted_line">栏目导航</h3>	
+<div class="tout news_categories">
+<ul>
+{php $j=1;} 
+{php $now_catid = $CATEGORYS[$catid][parentid] == 0 ? $catid : $CATEGORYS[$catid][parentid];}
+{loop subcat($now_catid) $v} 
+{php if($v['type']!=0) continue;} 
+<li{if $catid==$v[catid]} class="prselected"{/if}><a href="{$v[url]}"><span>{$v[catname]}</span><span class="symbol">></span></a></li>
+{/loop}
+</ul>
+</div>
+</div>
+<div class="sweibo"><iframe width="230" height="85" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=230&height=85&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=3774309970&verifier=5dd3f091&colors=d6f3f7,f8f8f8,666666,0082cb,ecfbfd&dpc=1"></iframe></div>
+</div>
+<!-- END sidebar-left -->
+<!-- start content -->
+<div class="content" id="prowidth">
+<div id="main_column_left">
+<!-- start post -->
+{pc:content  action="lists" catid="$catid" order="id DESC" page="$page" num="2"}
+{loop $data $r}
+<div class="post">
+{if $r[thumb]}
+<div id="post-featured-image">
+<a href="{$r['url']}"><img src="{$r[thumb]}" class="image-grid-border" alt="{$r[title]}" title="{$r[title]}"></a>
+</div>
+{/if}
+<h2 class="post_title"><a href="{$r['url']}" title="{$r[title]}">{$r[title]}</a></h2>
+<div class="byline">{date('Y-m-d',$r[inputtime])} | {$CATEGORYS[$r[catid]][catname]}</div>
+<p>{str_cut($r['description'],200)}</p>
+<br>
+<a href="{$r['url']}" class="button white">查看更多</a>						
+</div>
+<div class="poline"></div>
+{/loop}
+{/pc}
+<!-- end post -->
+</div>
+<div class="clear"></div>
+<!-- Pagination -->
+<div class="pagination"><ul>{$custom_pages}</ul></div>
+<!-- End Pagination -->
+<div class="clear"></div>
+</div>
+<!-- END content -->
+</div>
+<!-- END content_wrapper-->
+{template "content","footer"}

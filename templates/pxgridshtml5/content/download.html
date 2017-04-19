@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>下载详情页</title>
+<link href="{CSS_PATH}invested/blue.css" rel="stylesheet" type="text/css">
+<script language="javascript" type="text/javascript" src="{JS_PATH}jquery.min.js"></script>
+</head>
+<body>
+	<style type="text/css">
+    	 body, html{ background:#FFF!important;}
+		 .dfile{ margin:0 auto 0 auto; width:162px;}
+    </style>
+     <h2 class="dotted_line"></h2>
+    {if $allow_visitor==1}
+	<div class="dfile"><a href="{$downurl}" id="xzs_btn" class="button white">点击下载</a></div>
+	{else}
+	<CENTER><a href="{APP_PATH}index.php?m=content&c=readpoint&allow_visitor={$allow_visitor}"><font color="red">阅读此信息需要您支付 <B><I>{$readpoint} {if $paytype}元{else}点{/if}</I></B>，点击这里支付</font></a></CENTER>
+	{/if}
+
+</body>
+</html>

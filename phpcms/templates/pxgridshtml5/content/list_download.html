@@ -1,0 +1,59 @@
+{template "content","header"}
+<div id="mid_caption"><!-- start mid_caption -->
+  <div class="pages">
+      <!-- Page Title -->
+      <div id="page-title"> 
+        {pc:get sql="SELECT `catid`,`catname` FROM `phpcms_category` WHERE catid = $catid" return="data"}
+        {loop $data $r}
+        <h2>{$r[catname]}</h2>
+        {/loop}
+        {/pc}
+      <div class="clear"></div>
+      <div id="bolded-line"></div>
+      </div>
+      <!-- Page Title / End -->
+    <div class="clear"></div>
+  </div>
+</div><!-- END mid_caption -->
+<div id="content_wrapper"><!-- start content_wrapper-->
+<div class="content" class="left">
+  <div id="main_column">
+    <h3 class="dotted_line">最近更新</h3>
+    {pc:content  action="lists" catid="$catid" thumb="1" order="id DESC" page="$page" num="5"}
+    <ul>
+    {loop $data $r}
+  <li class="downloadlist">
+  <img src="{$r[thumb]}" alt="{$r[title]}"> 
+    <h4><a href="{$r['url']}">{$r[title]}</a></h4>
+    <span>{$r[description]}</span>
+    <a href="{$r['url']}" class="button white">查看下载</a>
+  </li>
+     {/loop}
+     </ul>
+     {/pc}
+  <div class="clear"></div>
+  </div>
+<div class="clear"></div>
+<!-- Pagination -->
+<div class="pagination"><ul>{$custom_pages}</ul></div>
+<!-- End Pagination -->
+<div class="clear"></div>
+</div>
+<div id="sidebar-right">
+  <div class="right-sidebar-block">
+  <h3 class="dotted_line">下载排行榜</h3>
+  <div class="navigation">
+    {php $num=0;}
+    {pc:content action="hits" catid="$catid" num="10" order="views DESC" cache="3600"}
+    <ul>
+    {loop $data $v}
+    {php $num++;}
+    <li><em>{$num}</em> <a href="{$v[url]}" target="_blank">{str_cut($v['title'],48)}</a></li>
+    {/loop}
+    </ul>
+    {/pc}
+    </div>
+</div>
+</div>
+</div><!-- END content_wrapper-->
+{template "content","footer"}
