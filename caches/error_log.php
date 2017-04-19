@@ -213,3 +213,9 @@
 <?php exit;?>04-18 16:57:56 | 8192 | preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead | phpcms\libs\classes\template_cache.class.php | 94
 <?php exit;?>04-18 17:33:41 | 2 | extract() expects parameter 1 to be array, null given | phpcms\modules\content\classes\html.class.php | 182
 <?php exit;?>04-18 17:33:36 | 2 | fsockopen():                   | phpcms\libs\classes\http.class.php | 84
+<?php exit;?>04-19 09:29:15 | 8192 | preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead | phpcms\libs\classes\template_cache.class.php | 91
+<?php exit;?>04-19 09:29:15 | 8192 | preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead | phpcms\libs\classes\template_cache.class.php | 93
+<?php exit;?>04-19 09:29:15 | 8192 | preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead | phpcms\libs\classes\template_cache.class.php | 94
+<?php exit;?>04-19 11:19:57 | 8192 | preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead | phpcms\libs\classes\template_cache.class.php | 91
+<?php exit;?>04-19 11:19:57 | 8192 | preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead | phpcms\libs\classes\template_cache.class.php | 93
+<?php exit;?>04-19 11:19:57 | 8192 | preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead | phpcms\libs\classes\template_cache.class.php | 94

@@ -668,7 +668,7 @@ $LANG['default_style'] = '默认风格';
 
 $LANG['your_server_it_may_not_have_access_to'] = '您的服务器，可能无法访问到';
 $LANG['_please_check_the_server_configuration'] = '，请检查服务器配置。';
-$LANG['phpcms_logon'] = 'phpcms 登录';
+$LANG['phpcms_logon'] = '登录';
 $LANG['please_input_your_password_the_picture_corresponding_location_6_digits'] = '请输入口令卡中图片对应位置的6位数字';
 $LANG['ht_card'] = '口令卡';
 $LANG['apply_for_a_password_card'] = '申请口令卡';

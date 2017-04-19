@@ -39,7 +39,7 @@ margin-left:-280px;position:absolute;width:560px; overflow:visible;}
     <div id="yzm" class="yzm"><?php echo form::checkcode('code_img')?><br /><a href="javascript:document.getElementById('code_img').src='<?php echo SITE_PROTOCOL.SITE_URL.WEB_PATH;?>api.php?op=checkcode&m=admin&c=index&a=checkcode&time='+Math.random();void(0);"><?php echo L('click_change_validate')?></a></div>
      </form>
     </div>
-    <div class="cr"><?php echo L("copyright")?></div>
+    <!-- <div class="cr"><?php //echo L("copyright")?></div> -->
 </div>
 </body>
 </html>
